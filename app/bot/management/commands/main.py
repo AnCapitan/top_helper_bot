@@ -43,16 +43,16 @@ def help(message):
 @bot.message_handler(content_types=['text'])
 def get_message(message):
     if message.text == "Поставить задачу Сис.Админам 👨‍💻":
-        bot.send_message(message.from_user.id, "Напишите мне свой вопрос и я отправлю его спикеру", reply_markup=keyboardCancel)
+        bot.send_message(message.from_user.id, "Напиши мне задачу и я отправлю её в чат системных администраторов", reply_markup=keyboardCancel)
         bot.register_next_step_handler(message, set_task_admin) 
     elif message.text == "Вопрос директору 😎":
-        bot.send_message(message.from_user.id, "Напишите мне свой вопрос и я отправлю его спикеру", reply_markup=keyboardCancel)
+        bot.send_message(message.from_user.id, "Напишите мне свой вопрос и я отправлю прямиком к директору", reply_markup=keyboardCancel)
         bot.register_next_step_handler(message, question_director)
     elif message.text == "Вопрос учебной части 👩‍🏫":
-        bot.send_message(message.from_user.id, "Напишите мне свой вопрос и я отправлю его спикеру", reply_markup=keyboardCancel)
+        bot.send_message(message.from_user.id, "Напишите мне свой вопрос и я отправлю в чат учебной части", reply_markup=keyboardCancel)
         bot.register_next_step_handler(message, question_educational_part) 
     elif message.text == "Вопрос приемной комиссии 🧑‍💼":
-        bot.send_message(message.from_user.id, "Напишите мне свой вопрос и я отправлю его спикеру", reply_markup=keyboardCancel)
+        bot.send_message(message.from_user.id, "Напишите мне свой вопрос и я отправлю его в чат приемной комиссии", reply_markup=keyboardCancel)
         bot.register_next_step_handler(message, question_selection_committee) 
     else:
         bot.send_message(message.from_user.id, "Извините, я Вас не понимаю... Воспользуйтесь кнопками", reply_markup=keyboardStart)
@@ -71,7 +71,7 @@ def set_task_admin(message):
         time_str = now.strftime('%Y-%m-%d %H:%M:%S')
         text = f"Задача от {message.from_user.username}:\n<b>Дата и время постановки задачи:</b> {time_str}\n<b>Описание задачи/проблемы</b>:{message.text}\n\nСсылка на его TG: https://t.me/{message.from_user.username}"
         bot.send_message(GROUPADMIN, text, parse_mode='html')
-        bot.send_message(message.from_user.id, "Ваша задача отправлена в чат сис админов", reply_markup=keyboardStart)
+        bot.send_message(message.from_user.id, "Ваша задача отправлена в чат системных администраторов", reply_markup=keyboardStart)
         bot.register_next_step_handler(message, get_message)
 
 
@@ -89,7 +89,7 @@ def question_director(message):
         time_str = now.strftime('%Y-%m-%d %H:%M:%S')
         text = f"Вопрос в чат с директором от {message.from_user.username}:\n<b>Дата и время вопроса:</b> {time_str}\n<b>Вопрос</b>:{message.text}\n\nСсылка на его TG: https://t.me/{message.from_user.username}"
         bot.send_message(GROUPDIRECTOR, text, parse_mode='html')
-        bot.send_message(message.from_user.id, "Ваше сообщение отправлено с директром", reply_markup=keyboardStart)
+        bot.send_message(message.from_user.id, "Ваше сообщение отправлено в чат с директором", reply_markup=keyboardStart)
         bot.register_next_step_handler(message, get_message)
 
 
@@ -107,7 +107,7 @@ def question_educational_part(message):
         time_str = now.strftime('%Y-%m-%d %H:%M:%S')
         text = f"Вопрос в чат <b>учебной части</b> от {message.from_user.username}:\n<b>Дата и время вопроса:</b> {time_str}\n<b>Вопрос</b>:{message.text}\n\nСсылка на его TG: https://t.me/{message.from_user.username}"
         bot.send_message(GROUP_EDUCATIONAL, text, parse_mode='html')
-        bot.send_message(message.from_user.id, "Ваше сообщение отправлен в чат учебной части", reply_markup=keyboardStart)
+        bot.send_message(message.from_user.id, "Ваше сообщение отправлено в чат учебной части", reply_markup=keyboardStart)
         bot.register_next_step_handler(message, get_message)
 
 def question_selection_committee(message):
@@ -123,7 +123,7 @@ def question_selection_committee(message):
         time_str = now.strftime('%Y-%m-%d %H:%M:%S')
         text = f"Вопрос в чат <b>приемной комиссии</b> от {message.from_user.username}:\n<b>Дата и время вопроса:</b> {time_str}\n<b>Вопрос</b>:{message.text}\n\nСсылка на его TG: https://t.me/{message.from_user.username}"
         bot.send_message(GROUP_EDUCATIONAL, text, parse_mode='html')
-        bot.send_message(message.from_user.id, "Ваше сообщение отправлено в чат приемной комисии", reply_markup=keyboardStart)
+        bot.send_message(message.from_user.id, "Ваше сообщение отправлено в чат приемной комиссии", reply_markup=keyboardStart)
         bot.register_next_step_handler(message, get_message)
 
 
