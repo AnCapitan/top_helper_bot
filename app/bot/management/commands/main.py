@@ -31,8 +31,13 @@ keyboardCancel.add(btnCancel)
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message.from_user.id, "{0}, рад приветствовать Вас на конференции!🥳".format(message.from_user.first_name))
-    bot.send_message(message.from_user.id, "Сделайте выбор с помощью кнопок внизу☺", reply_markup=keyboardStart)
+    bot.send_message(message.from_user.id, "{0}, рад приветствовать в телеграм боте <b>TOP Helper | Красноярск</b>".format(message.from_user.first_name), parse_mode='html')
+    bot.send_message(message.from_user.id, "Сделайте выбор с помощью кнопок внизу", reply_markup=keyboardStart)
+
+@bot.message_handler(commands=['help'])
+def help(message):
+    text = "Перед оправкой сообщения четко сформулируйте у себя в голове вопрос\n после определитесь в какой отдел TOP вам надо отправить ваше сообщение"
+    bot.send_message(chat_id=message.from_user.id, text=text, parse_mode="html")
 
 
 @bot.message_handler(content_types=['text'])
@@ -121,6 +126,13 @@ def question_selection_committee(message):
         bot.send_message(message.from_user.id, "Ваше сообщение отправлено спикеру", reply_markup=keyboardStart)
         bot.register_next_step_handler(message, get_message)
 
+
+
+
+bot.set_my_commands([
+    types.BotCommand("/start", "Перезапуск бота"),
+    types.BotCommand("/help", "Инструкция")
+])
 
 
 class Command(BaseCommand):
